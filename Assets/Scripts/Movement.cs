@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -48,24 +49,26 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_looksRight)
-        {           
-            _rigidbody2D.velocity = new Vector2(_forwardSeed  * Time.fixedDeltaTime, _rigidbody2D.velocity.y);
-        }
-        else
-        {
-            _rigidbody2D.velocity = new Vector2(-_forwardSeed * Time.fixedDeltaTime, _rigidbody2D.velocity.y);
-        }
-        
-       
-        _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y - _gravity * Time.fixedDeltaTime);
-
+        _rigidbody2D.velocity = new Vector2(_forwardSeed  * Time.fixedDeltaTime, _rigidbody2D.velocity.y - _gravity * Time.fixedDeltaTime);
+    }
+    
+    private void Flip()
+    {
+        _countFlip++;
+        _looksRight = !_looksRight;
+        _forwardSeed *= -1;
     }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        _countFlip++;
-        _looksRight = !_looksRight;
+        if (collision.collider.CompareTag("Wall"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else if (collision.collider.CompareTag("Platform"))
+        {
+           Flip();
+        }
     }
 }
