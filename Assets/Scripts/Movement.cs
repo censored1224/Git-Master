@@ -15,12 +15,12 @@ public class Movement : MonoBehaviour
 
     private static int _countFlip;
 
+    private bool _looksRight;
 
-    private bool _looksRight { 
-        get;
-        set; 
+    public int CountFplip()
+    {
+        return _countFlip;
     }
-
 
     void Start()
     {

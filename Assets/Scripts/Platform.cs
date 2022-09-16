@@ -13,7 +13,7 @@ public class Platform : MonoBehaviour
 
     private void Awake()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>(); 
 
     }
 
@@ -29,6 +29,15 @@ public class Platform : MonoBehaviour
         }
 
         _rigidbody2D.velocity = new Vector2(0, _speedPlatform * Time.fixedDeltaTime);
+
+        /*Movement move = new Movement();
+
+        if((move.CountFplip() % 2) == 0 && move.CountFplip() != 0) 
+
+        {|
+            _speedPlatform += 200 * Time.fixedDeltaTime;
+        }*/
+
 
     }
 
